@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0111001EC89B790038E65D /* StepikDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0110FF1EC89B790038E65D /* StepikDataTypes.swift */; };
 		DD0CD18F1EC5171B00AD6362 /* CourseInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0CD18E1EC5171B00AD6362 /* CourseInfoVC.swift */; };
-		DD0CD1911EC51E1900AD6362 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0CD1901EC51E1900AD6362 /* extensions.swift */; };
+		DD0CD1911EC51E1900AD6362 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0CD1901EC51E1900AD6362 /* ImageExtensions.swift */; };
 		DD4C5E6E1EC39058007041C1 /* CellCoursesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4C5E6D1EC39058007041C1 /* CellCoursesList.swift */; };
 		DD710FDC1EC464E000D73E6E /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD710FDB1EC464E000D73E6E /* DataLoader.swift */; };
 		DDFE64DF1EBF78CB005FFF2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFE64DE1EBF78CB005FFF2F /* AppDelegate.swift */; };
@@ -21,8 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD0110FF1EC89B790038E65D /* StepikDataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikDataTypes.swift; sourceTree = "<group>"; };
 		DD0CD18E1EC5171B00AD6362 /* CourseInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoVC.swift; sourceTree = "<group>"; };
-		DD0CD1901EC51E1900AD6362 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		DD0CD1901EC51E1900AD6362 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
 		DD4C5E6D1EC39058007041C1 /* CellCoursesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellCoursesList.swift; sourceTree = "<group>"; };
 		DD710FDB1EC464E000D73E6E /* DataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		DDFE64DB1EBF78CB005FFF2F /* StepikCourses (JB internship task).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StepikCourses (JB internship task).app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +49,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD0110FB1EC89A8B0038E65D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DD0CD1901EC51E1900AD6362 /* ImageExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		DD0110FC1EC89AA30038E65D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DDFE64F51EBFC3DD005FFF2F /* CoursesListVC.swift */,
+				DD0CD18E1EC5171B00AD6362 /* CourseInfoVC.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DD0110FD1EC89AC20038E65D /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				DD4C5E6D1EC39058007041C1 /* CellCoursesList.swift */,
+			);
+			name = CustomCells;
+			sourceTree = "<group>";
+		};
+		DD0110FE1EC89AEC0038E65D /* DataWorking */ = {
+			isa = PBXGroup;
+			children = (
+				DDFE64F31EBF7AF8005FFF2F /* StepikApiWorker.swift */,
+				DD710FDB1EC464E000D73E6E /* DataLoader.swift */,
+				DD0110FF1EC89B790038E65D /* StepikDataTypes.swift */,
+			);
+			name = DataWorking;
+			sourceTree = "<group>";
+		};
 		DDFE64D21EBF78CB005FFF2F = {
 			isa = PBXGroup;
 			children = (
@@ -66,18 +103,16 @@
 		DDFE64DD1EBF78CB005FFF2F /* StepikCourses (JB internship task) */ = {
 			isa = PBXGroup;
 			children = (
+				DD0110FE1EC89AEC0038E65D /* DataWorking */,
+				DD0110FD1EC89AC20038E65D /* CustomCells */,
+				DD0110FC1EC89AA30038E65D /* ViewControllers */,
+				DD0110FB1EC89A8B0038E65D /* Extensions */,
 				DDFE64DE1EBF78CB005FFF2F /* AppDelegate.swift */,
 				DDFE64E21EBF78CB005FFF2F /* Main.storyboard */,
 				DDFE64E81EBF78CB005FFF2F /* Assets.xcassets */,
 				DDFE64EA1EBF78CB005FFF2F /* LaunchScreen.storyboard */,
 				DDFE64ED1EBF78CB005FFF2F /* Info.plist */,
 				DDFE64E51EBF78CB005FFF2F /* StepikCourses__JB_internship_task_.xcdatamodeld */,
-				DDFE64F31EBF7AF8005FFF2F /* StepikApiWorker.swift */,
-				DDFE64F51EBFC3DD005FFF2F /* CoursesListVC.swift */,
-				DD4C5E6D1EC39058007041C1 /* CellCoursesList.swift */,
-				DD710FDB1EC464E000D73E6E /* DataLoader.swift */,
-				DD0CD18E1EC5171B00AD6362 /* CourseInfoVC.swift */,
-				DD0CD1901EC51E1900AD6362 /* extensions.swift */,
 			);
 			path = "StepikCourses (JB internship task)";
 			sourceTree = "<group>";
@@ -157,9 +192,10 @@
 				DD4C5E6E1EC39058007041C1 /* CellCoursesList.swift in Sources */,
 				DDFE64F41EBF7AF8005FFF2F /* StepikApiWorker.swift in Sources */,
 				DD710FDC1EC464E000D73E6E /* DataLoader.swift in Sources */,
-				DD0CD1911EC51E1900AD6362 /* extensions.swift in Sources */,
+				DD0CD1911EC51E1900AD6362 /* ImageExtensions.swift in Sources */,
 				DD0CD18F1EC5171B00AD6362 /* CourseInfoVC.swift in Sources */,
 				DDFE64E71EBF78CB005FFF2F /* StepikCourses__JB_internship_task_.xcdatamodeld in Sources */,
+				DD0111001EC89B790038E65D /* StepikDataTypes.swift in Sources */,
 				DDFE64DF1EBF78CB005FFF2F /* AppDelegate.swift in Sources */,
 				DDFE64F61EBFC3DD005FFF2F /* CoursesListVC.swift in Sources */,
 			);

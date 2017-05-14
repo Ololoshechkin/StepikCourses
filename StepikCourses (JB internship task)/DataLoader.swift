@@ -17,28 +17,41 @@ class DataLoader {
     private static var dataCacheIsLoaded = false
     
     public static func saveImgCache() {
+        print("saving image cache")
+        var dataToSave = [String: Data]()
+        imageCache.forEach({ (key: String, image: UIImage) -> Void in
+            dataToSave[key] = NSKeyedArchiver.archivedData(
+                withRootObject: UIImagePNGRepresentation(image)!
+            )
+        })
         UserDefaults.standard.setValue(
-            imageCache,
+            dataToSave,
             forKey: "imageCache"
         )
         UserDefaults.standard.synchronize()
         imgCacheIsLoaded = true
+        print("saved image cache!!!")
     }
     
     public static func saveDataCache() {
+        print("saving data cache")
         UserDefaults.standard.setValue(
-            otherDataCache,
+            otherDataCache as NSDictionary,
             forKey: "otherDataCache"
         )
         UserDefaults.standard.synchronize()
         dataCacheIsLoaded = true
+        print("saved data cache!!!")
     }
     
     public static func loadImgCache() {
         if (!imgCacheIsLoaded) {
-            imageCache = UserDefaults.standard.value(
+            let rowImageCache = UserDefaults.standard.value(
                 forKey: "imageCache"
-            ) as? [String: UIImage] ?? [:]
+            ) as? [String: Data] ?? [:]
+            rowImageCache.forEach({ (key: String, value: Data) -> () in
+                imageCache[key] = UIImage(data: value)
+            })
             imgCacheIsLoaded = true
         }
     }
@@ -65,28 +78,27 @@ class DataLoader {
         saveDataCache()
     }
     
-    public static func loadImage(byUrl url: String, to imageView: UIImageView, postAction: @escaping () -> () = {}) {
+    public static func loadImage(byUrl url: String, postAction: @escaping (UIImage) -> () = {_ in }) {
         loadImgCache()
         if let cachedImage = imageCache[url] {
             DispatchQueue.main.async {
-                imageView.image = cachedImage
-                postAction()
+                postAction(cachedImage)
             }
+        } else {
+            let task = URLSession.shared.dataTask(
+                with: URL(string: url)!
+            ) { (responseData, responseUrl, error) -> () in
+                DispatchQueue.main.async(execute: { () -> Void in
+                    var loadedImage = #imageLiteral(resourceName: "StepikLogo")
+                    if let data = responseData {
+                        loadedImage = UIImage(data: data) ?? #imageLiteral(resourceName: "StepikLogo")
+                    }
+                    DataLoader.imageCache[url] = loadedImage
+                    postAction(loadedImage)
+                })
+            }
+            task.resume()
         }
-        let task = URLSession.shared.dataTask(
-            with: URL(string: url)!
-        ) { (responseData, responseUrl, error) -> () in
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let data = responseData {
-                    imageView.image = UIImage(data: data)
-                } else {
-                    imageView.image = #imageLiteral(resourceName: "StepikLogo")
-                }
-                postAction()
-            })
-            
-        }
-        task.resume()
     }
     
     public static func getCachedData(by key: String, postAction: @escaping () -> () = {}) -> Any? {
@@ -99,6 +111,6 @@ class DataLoader {
         otherDataCache[key] = data
     }
     
-    // TODO : video loading, huge files loading etc.
+    // TODO : video loading
     
 }

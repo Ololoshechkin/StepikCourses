@@ -36,7 +36,7 @@ class CourseInfoVC: UIViewController {
     
     private func getProceedText(title: String, content: String) -> NSAttributedString? {
         return try! NSAttributedString(
-            data: ("<html></h1>" + title + ":</h1><hr size=\"2\"></html>" + content + "\n").data(
+            data: ("<p>\(title):</p>" + content + "\n").data(
                 using: String.Encoding.unicode,
                 allowLossyConversion: true)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
@@ -70,21 +70,27 @@ class CourseInfoVC: UIViewController {
             label?.font = contentFont
             label?.sizeToFit()
         }
+        print("gonna load image")
         DataLoader.loadImage(
-            byUrl: (course?.cover)!,
-            to: coverImage,
-            postAction: { () -> Void in
-                let color = (self.coverImage.image?.getAverageColor())!
+            byUrl: (course?.coverPath)!,
+            postAction: { (loadedImage) -> Void in
+                print("post action")
+                self.coverImage.image = loadedImage
+                print("cover image is set!")
+                let color = loadedImage.getAverageColor()
+                print("getAverageColor")
                 let alphaColor = color.withAlphaComponent(0.9)
                 self.background.backgroundColor = alphaColor
                 self.navigationController?.navigationBar.backgroundColor = color
-                let rightSideColor = self.coverImage.image?.getRightSideColor()
+                let rightSideColor = loadedImage.getRightSideColor()
                 self.backgroundCover.backgroundColor = rightSideColor
                 self.scrollView.backgroundColor = alphaColor
                 self.view.backgroundColor = alphaColor
-                if (rightSideColor?.isDark())! {
+                print("before (is dark)")
+                if (rightSideColor.isDark()) {
                     self.nameLabel.textColor = UIColor.white
                 }
+                print("after (is dark)")
             }
         )
     }

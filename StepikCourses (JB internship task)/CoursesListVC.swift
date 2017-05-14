@@ -29,16 +29,22 @@ class CoursesListVK: UITableViewController {
                     self.coursesList.append(course)
                 })
             } catch {
-                let failViewController = (self.storyboard?.instantiateViewController(
-                    withIdentifier: "FailPage"
-                ))!
-                failViewController.navigationItem.setHidesBackButton(
-                    true,
-                    animated: true
+                let alertMessage = UIAlertController(
+                    title: "stepik courses exception",
+                    message: "failed to load new courses =(",
+                    preferredStyle: .alert
                 )
-                self.navigationController?.pushViewController(
-                    failViewController,
-                    animated: true
+                alertMessage.addAction(
+                    UIAlertAction(
+                        title: "got it!",
+                        style: .cancel,
+                        handler: nil
+                    )
+                )
+                self.present(
+                    alertMessage,
+                    animated: true,
+                    completion: nil
                 )
             }
             DispatchQueue.main.async {
@@ -124,10 +130,16 @@ class CoursesListVK: UITableViewController {
         } else {
             currentCell.name.text = coursesList[indexPath.row].name
             currentCell.summary.text = coursesList[indexPath.row].summary
+            currentCell.cover.image = #imageLiteral(resourceName: "StepikLogo")
             DataLoader.loadImage(
-                byUrl: coursesList[indexPath.row].cover,
-                to: currentCell.cover
+                byUrl: coursesList[indexPath.row].coverPath,
+                postAction: { (loadedImage) in
+                    if let visibleCell = self.tableView.cellForRow(at: indexPath) {
+                        (visibleCell as! CellCoursesList).cover.image = loadedImage
+                    }
+                }
             )
+            
         }
         return currentCell
     }
@@ -149,6 +161,8 @@ class CoursesListVK: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("preparing for segue")
+        super.prepare(for: segue, sender: sender)
         cacheData()
     }
     
