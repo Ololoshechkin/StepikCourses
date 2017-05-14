@@ -27,8 +27,9 @@ class CourseInfoVC: UIViewController {
     
     public var course: CourseInfo?
     private var videoPlayer = AVPlayerViewController()
+    @IBOutlet weak var openCourseLinkButton: UIButton!
     
-    @IBAction func openCourseLinkButton(_ sender: Any) {
+    @IBAction func openCourseLink(_ sender: Any) {
         UIApplication.shared.openURL(
             URL(string: (course?.getLink())!)!
         )
@@ -90,6 +91,14 @@ class CourseInfoVC: UIViewController {
                 if (rightSideColor.isDark()) {
                     self.nameLabel.textColor = UIColor.white
                 }
+                self.openCourseLinkButton.setTitleColor(
+                    self.background.backgroundColor?.inverted(),
+                    for: .normal
+                )
+                self.openCourseLinkButton.setTitleColor(
+                    self.background.backgroundColor,
+                    for: .selected
+                )
             }
         )
     }

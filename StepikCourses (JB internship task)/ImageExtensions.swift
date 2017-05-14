@@ -12,17 +12,34 @@ import UIKit
 
 extension UIColor {
     
-    func isDark() -> Bool {
+    func getRGBInCGFloat() -> (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
         getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        let redKoeff = CGFloat(0.3)
-        let greenKoeff = CGFloat(0.6)
-        let blueKoeff = CGFloat(0.1)
-        let koeff = redKoeff * red + greenKoeff * green + blueKoeff * blue
+        return (red, green, blue, alpha)
+    }
+    
+    func getRGB() -> (red: Float, green: Float, blue: Float, alpha: Float) {
+        let (red, green, blue, alpha) = getRGBInCGFloat()
+        return (Float(red), Float(green), Float(blue), Float(alpha))
+    }
+    
+    func isDark() -> Bool {
+        let (red, green, blue, _) = getRGB()
+        let koeff = 0.3 * red + 0.6 * green + 0.1 * blue
         return koeff < 0.5
+    }
+    
+    func inverted() -> UIColor {
+        let (red, green, blue, alpha) = getRGBInCGFloat()
+        return UIColor(
+            red: CGFloat(1.0) - red,
+            green: CGFloat(1.0) - green,
+            blue: CGFloat(1.0) - blue,
+            alpha: alpha
+        )
     }
 
 }
