@@ -18,7 +18,7 @@ struct CourseInfo {
         return "https://stepik.org\(coverSufix)"
     }
     let description: String
-    let intro: String
+    let intro: String?
     let requirements: String
     let authorIds: [Int]
     var authors: [UserInfo] {

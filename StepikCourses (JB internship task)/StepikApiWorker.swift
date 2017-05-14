@@ -83,6 +83,23 @@ class StepikApiWorker {
         })
     }
     
+    private class func getVideoPath(for course: [String: Any]) -> String? {
+        let videoData = course["intro_video"] as? [String: Any]
+        if (videoData != nil) {
+            var answer: (quality: Int, url: String?)?
+            (videoData?["urls"] as! [[String: String]]).forEach({ (variant) in
+                let quality = Int(variant["quality"]!)!
+                let url = variant["url"]
+                if (answer == nil) || (quality > (answer?.quality)!) {
+                    answer = (quality, url)
+                }
+            })
+            return answer?.url
+        } else {
+            return nil
+        }
+    }
+    
     private class func getCourseList(bucket: Int) throws -> [CourseInfo] {
         let courses = try StepikApiWorker.coursesQuery(
             part: "courses",
@@ -95,7 +112,7 @@ class StepikApiWorker {
                 summary: course["summary"] as? String ?? "open to see more",
                 coverSufix: course["cover"] as? String ?? "",
                 description: course["description"] as? String ?? "no description",
-                intro: course["intro"] as? String ?? "no introduction",
+                intro: getVideoPath(for: course),
                 requirements: course["requirements"] as? String ?? "everyone can try!",
                 authorIds: course["instructors"] as! [Int]
             )

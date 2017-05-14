@@ -91,8 +91,8 @@ extension UIImage {
     
     func getRightSideColor() -> UIColor {
         return getAverageColor(
-            fromX: Int(size.width) - 3,
-            toX: Int(size.width),
+            fromX: Int(size.width) - 2,
+            toX: Int(size.width) - 1,
             fromY: 0,
             toY: Int(size.height)
         )
