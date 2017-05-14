@@ -22,11 +22,11 @@ class CoursesListVK: UITableViewController {
             return
         }
         busy = true
-        DispatchQueue.global(qos: .userInteractive).async(execute: {() -> Void in
+        DispatchQueue.global(qos: .userInteractive).async(execute: {[weak self]() -> Void in
             do {
-                let someMoreCourses = try self.apiWorker.getNextCourseList()
-                someMoreCourses.forEach({ (course) in
-                    self.coursesList.append(course)
+                let someMoreCourses = try self?.apiWorker.getNextCourseList()
+                someMoreCourses?.forEach({ (course) in
+                    self?.coursesList.append(course)
                 })
             } catch {
                 let alertMessage = UIAlertController(
@@ -41,7 +41,7 @@ class CoursesListVK: UITableViewController {
                         handler: nil
                     )
                 )
-                self.present(
+                self?.present(
                     alertMessage,
                     animated: true,
                     completion: nil
@@ -49,9 +49,9 @@ class CoursesListVK: UITableViewController {
             }
             DispatchQueue.main.async {
                 postAction()
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
-            self.busy = false
+            self?.busy = false
         })
     }
     
@@ -86,11 +86,11 @@ class CoursesListVK: UITableViewController {
         DataLoader.resetImageCache()
         self.coursesList = []
         DispatchQueue.global(qos: .userInitiated).async(
-            execute: { () -> Void in
-                self.loadCellsBucket()
+            execute: { [weak self]() -> Void in
+                self?.loadCellsBucket()
                 sleep(1)
-                self.isRefreshing = false
-                self.refreshControl?.endRefreshing()
+                self?.isRefreshing = false
+                self?.refreshControl?.endRefreshing()
             }
         )
     }
@@ -104,9 +104,9 @@ class CoursesListVK: UITableViewController {
         if (userOfset >= maxOfset) {
             tableView.tableFooterView?.isHidden = false
             loadingIndicator.startAnimating()
-            loadCellsBucket(postAction: { () -> Void in
-                self.tableView.tableFooterView?.isHidden = true
-                self.loadingIndicator.stopAnimating()
+            loadCellsBucket(postAction: { [weak self]() -> Void in
+                self?.tableView.tableFooterView?.isHidden = true
+                self?.loadingIndicator.stopAnimating()
             })
         }
     }
@@ -133,8 +133,8 @@ class CoursesListVK: UITableViewController {
             currentCell.cover.image = #imageLiteral(resourceName: "StepikLogo")
             DataLoader.loadImage(
                 byUrl: coursesList[indexPath.row].coverPath,
-                postAction: { (loadedImage) in
-                    if let visibleCell = self.tableView.cellForRow(at: indexPath) {
+                postAction: { [weak self](loadedImage) in
+                    if let visibleCell = self?.tableView.cellForRow(at: indexPath) {
                         (visibleCell as! CellCoursesList).cover.image = loadedImage
                     }
                 }
@@ -161,7 +161,6 @@ class CoursesListVK: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("preparing for segue")
         super.prepare(for: segue, sender: sender)
         cacheData()
     }

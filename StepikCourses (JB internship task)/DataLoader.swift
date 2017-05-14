@@ -17,7 +17,6 @@ class DataLoader {
     private static var dataCacheIsLoaded = false
     
     public static func saveImgCache() {
-        print("saving image cache")
         var dataToSave = [String: Data]()
         imageCache.forEach({ (key: String, image: UIImage) -> Void in
             dataToSave[key] = NSKeyedArchiver.archivedData(
@@ -30,18 +29,15 @@ class DataLoader {
         )
         UserDefaults.standard.synchronize()
         imgCacheIsLoaded = true
-        print("saved image cache!!!")
     }
     
     public static func saveDataCache() {
-        print("saving data cache")
         UserDefaults.standard.setValue(
             otherDataCache as NSDictionary,
             forKey: "otherDataCache"
         )
         UserDefaults.standard.synchronize()
         dataCacheIsLoaded = true
-        print("saved data cache!!!")
     }
     
     public static func loadImgCache() {

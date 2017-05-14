@@ -70,15 +70,16 @@ class CourseInfoVC: UIViewController {
             label?.font = contentFont
             label?.sizeToFit()
         }
-        print("gonna load image")
         DataLoader.loadImage(
             byUrl: (course?.coverPath)!,
             postAction: { (loadedImage) -> Void in
-                print("post action")
                 self.coverImage.image = loadedImage
-                print("cover image is set!")
+                if loadedImage == #imageLiteral(resourceName: "StepikLogo") {
+                    self.background.backgroundColor = #colorLiteral(red: 0.8950740232, green: 0.8950740232, blue: 0.8950740232, alpha: 1)
+                    self.scrollView.backgroundColor = #colorLiteral(red: 0.8950740232, green: 0.8950740232, blue: 0.8950740232, alpha: 1)
+                    return
+                }
                 let color = loadedImage.getAverageColor()
-                print("getAverageColor")
                 let alphaColor = color.withAlphaComponent(0.9)
                 self.background.backgroundColor = alphaColor
                 self.navigationController?.navigationBar.backgroundColor = color
@@ -86,11 +87,9 @@ class CourseInfoVC: UIViewController {
                 self.backgroundCover.backgroundColor = rightSideColor
                 self.scrollView.backgroundColor = alphaColor
                 self.view.backgroundColor = alphaColor
-                print("before (is dark)")
                 if (rightSideColor.isDark()) {
                     self.nameLabel.textColor = UIColor.white
                 }
-                print("after (is dark)")
             }
         )
     }
