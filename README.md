@@ -6,7 +6,7 @@
 Setver(JSON) -> User Defaults -> RAM (Dictionary)
 
 ### 2. Unique design for eash course:
-Background and font colors depend on the average color of a course logo
+Background and font colors are based on the average color of a course logo
 
 <p align="center">
 <img float="left" src="screenshots/coursePage1.png" width="230"/>
