@@ -25,3 +25,11 @@ Background and font colors depend on the average color of a course logo
 <p align="center">
 <img float="left" src="screenshots/infiniteScrolling.png" width="300"/>
 </p>
+
+### 5. Video Playing
+
+### 6. Multiple info and site link for each course
+
+<p align="center">
+<img float="left" src="screenshots/siteLink.png" width="300"/>
+</p>
