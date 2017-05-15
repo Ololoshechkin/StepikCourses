@@ -31,13 +31,13 @@ Background and font colors are based on the average color of a course logo
 ### 6. Multiple info and site link for each course:
 
 <p align="center">
-<img float="left" src="screenshots/appArch.png" width="230"/>
+<img float="left" src="screenshots/siteLink.png" width="230"/>
 </p>
 
 ### 7. Handy app architecture:
 
 <p align="center">
-<img float="left" src="screenshots/siteLink.png" width="230"/>
+<img float="left" src="screenshots/appArch.png" width="230"/>
 </p>
 
 ## TODO :
