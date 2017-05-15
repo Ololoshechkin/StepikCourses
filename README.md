@@ -40,6 +40,10 @@ Background and font colors are based on the average color of a course logo
 <img float="left" src="screenshots/appArch.png" width="230"/>
 </p>
 
+### 8. Autolayout
+
+The app is compatible with all of ios devices with their unique screen scale 
+
 ## TODO :
 
 ### 1. Searching courses
