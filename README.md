@@ -5,7 +5,11 @@
 ### 1. Smart multiple level data cahing:
 Setver(JSON) -> User Defaults -> RAM (Dictionary)
 
-### 2. Unique design for eash course:
+### 2. Lazy image loading
+
+Asynchronous requests and Dispatch Queues usage in order to make images be placed in the table view when their downloading is complete.
+
+### 3. Unique design for eash course:
 Background and font colors are based on the average color of a course logo
 
 <p align="center">
@@ -14,33 +18,33 @@ Background and font colors are based on the average color of a course logo
 <img float="left" src="screenshots/coursePage3.png" width="230"/>
 </p>
 
-### 3. Pull to refresh
+### 4. Pull to refresh
 
 <p align="center">
 <img float="left" src="screenshots/pullToRefresh.png" width="230"/>
 </p>
 
-### 4. Infinite scrolling
+### 5. Infinite scrolling
 
 <p align="center">
 <img float="left" src="screenshots/infiniteScrolling.png" width="230"/>
 </p>
 
-### 5. Video Playing.
+### 6. Video Playing.
 
-### 6. Multiple info and site link for each course:
+### 7. Multiple info and site link for each course:
 
 <p align="center">
 <img float="left" src="screenshots/siteLink.png" width="230"/>
 </p>
 
-### 7. Handy app architecture:
+### 8. Handy app architecture:
 
 <p align="center">
 <img float="left" src="screenshots/appArch.png" width="230"/>
 </p>
 
-### 8. Autolayout
+### 9. Autolayout
 
 The app is compatible with all of ios devices with their unique screen scale 
 
