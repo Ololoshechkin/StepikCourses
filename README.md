@@ -3,7 +3,7 @@
 ## Features:
 
 ### 1. Smart multiple level data cahing:
-Setver(JSON) -> User Defaults -> RAM (Dictionary)
+Sever(JSON) -> User Defaults -> RAM (Dictionary)
 
 ### 2. Lazy image loading
 
